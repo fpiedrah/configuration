@@ -1,0 +1,5 @@
+require('plugins/cmp')
+require('plugins/treesitter')
+require('plugins/lspconfig')
+require('plugins/luasnip')
+require('plugins/onedark')
