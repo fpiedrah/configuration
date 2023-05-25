@@ -27,4 +27,5 @@ luac.out
 *.i*86
 *.x86_64
 *.hex
-./nvim/plugin
+nvim/plugin
+nvim/plugin/*
