@@ -59,7 +59,7 @@ return packer.startup(function(use)
 
   -- Color Schemes
   use 'navarasu/onedark.nvim'
-
+  
   -- Telescope
   use {
     'nvim-telescope/telescope.nvim',
