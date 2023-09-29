@@ -36,6 +36,9 @@ opt.updatetime = 700        -- ms to wait for trigger an event
 -- Startup
 opt.shortmess:append "sI"
 
+-- Text
+vim.wo.wrap = false
+
 -- Disable builtins plugins
 local disabled_built_ins = {
   "netrw",
