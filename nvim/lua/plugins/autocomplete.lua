@@ -9,11 +9,11 @@ function configuration()
         luasnip.lsp_expand(args.body)
       end,
     },
-  
+
     completion = {
       keyword_length = 3
     },
-  
+
     mapping = {
       ['<C-n>'] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Insert },
       ['<C-p>'] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
@@ -27,7 +27,7 @@ function configuration()
         select = true,
       },
     },
-  
+
     formatting = {
       format = lspkind.cmp_format {
         with_text = true,
@@ -42,18 +42,18 @@ function configuration()
         },
       },
     },
-  
+
     experimental = {
       native_menu = false,
       ghost_text = true,
     },
-  
+
     sources = {
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
       { name = 'path' },
-      { 
-        name = 'buffer', 
+      {
+        name = 'buffer',
         keyword_length = 5,
         max_item_count = 4,
       },

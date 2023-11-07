@@ -14,7 +14,6 @@ local function configuration()
   }
 
   local servers = {
-    'bashls',
     'clangd',
     'dockerls',
     'jsonls',
