@@ -9,6 +9,8 @@ alias vim="nvim"
 alias ls="lsd"
 alias tree="ls --tree"
 
+alias conda="micromamba"
+
 # >>> mamba initialize >>>
 # !! Contents within this block are managed by 'mamba init' !!
 set -gx MAMBA_EXE "/opt/homebrew/opt/micromamba/bin/micromamba"
