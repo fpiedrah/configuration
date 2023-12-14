@@ -1,0 +1,9 @@
+#pragma once
+
+// COMBOS
+#define COMBO_ALLOW_ACTION_KEYS
+#define COMBO_VARIABLE_LEN
+
+// MOD TAP
+#define IGNORE_MOD_TAP_INTERRUPT
+#define TAPPING_TERM 300
