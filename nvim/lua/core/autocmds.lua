@@ -15,6 +15,12 @@ autocmd('Filetype', {
     'typescript',
     'yaml',
     'lua',
+    'groovy',
   },
   command = 'setlocal shiftwidth=2 tabstop=2'
+})
+
+autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "*.nf",
+  command = "setfiletype groovy",
 })
