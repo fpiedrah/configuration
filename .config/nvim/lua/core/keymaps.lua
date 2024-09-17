@@ -21,12 +21,13 @@ map('n', '<leader>wh', '<C-w>h')
 map('n', '<leader>wj', '<C-w>j')
 map('n', '<leader>wk', '<C-w>k')
 map('n', '<leader>wl', '<C-w>l')
+map('n', '<leader>wx', '<C-w>c')
 
 -- Fast saving with <leader> and s
 map('n', '<leader>s', ':w<CR>')
 
 -- Close all windows and exit from Neovim with <leader> and q
-map('n', '<leader>q', ':qa!<CR>')
+map('n', '<leader>x', ':qa!<CR>')
 
 -- Terminal mappings
 map('n', '<leader>t', ':terminal<CR>', { noremap = true })
