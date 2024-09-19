@@ -14,7 +14,7 @@ map('n', '<leader>c', ':nohl<CR>')
 
 -- Splits
 map('n', '<leader>wo', '<C-w>n')
-map('n', '<leader>wv', '<C-w>v')
+map('n', '<leader>we', '<C-w>v')
 map('n', '<leader>wt', ':vert term<CR>')
 
 map('n', '<leader>wh', '<C-w>h')
