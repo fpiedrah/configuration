@@ -3,6 +3,7 @@ set -g fish_greeting
 
 # Add Brew To Path
 fish_add_path /opt/homebrew/bin
+fish_add_path /Library/TeX/texbin
 
 # Aliases
 alias v="nvim"
