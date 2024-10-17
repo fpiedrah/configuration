@@ -14,10 +14,12 @@ local function configuration()
   }
 
   local servers = {
+    'clan',
     'clangd',
     'dockerls',
     'jsonls',
     'julials',
+    'lemminx',
     'ltex',
     'lua_ls',
     'marksman',
@@ -25,7 +27,7 @@ local function configuration()
     'rust_analyzer',
     'sqlls',
     'taplo',
-    'lemminx',
+    'tinymist',
     'yamlls',
     'zls',
   }
