@@ -14,7 +14,6 @@ local function configuration()
   }
 
   local servers = {
-    'clan',
     'clangd',
     'dockerls',
     'jsonls',

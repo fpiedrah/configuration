@@ -16,8 +16,18 @@ autocmd('Filetype', {
     'yaml',
     'lua',
     'groovy',
+    'typst',
   },
   command = 'setlocal shiftwidth=2 tabstop=2'
+})
+
+-- Enable text wrapping at line end
+autocmd('Filetype', {
+  group = 'setWrap',
+  pattern = {
+    'typst',
+  },
+  command = 'setlocal wrap'
 })
 
 autocmd({ "BufRead", "BufNewFile" }, {
