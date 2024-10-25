@@ -22,6 +22,7 @@ autocmd('Filetype', {
 })
 
 -- Enable text wrapping at line end
+augroup('setWrap', { clear = true })
 autocmd('Filetype', {
   group = 'setWrap',
   pattern = {
