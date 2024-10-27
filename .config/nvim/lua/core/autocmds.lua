@@ -27,6 +27,7 @@ autocmd('Filetype', {
   group = 'setWrap',
   pattern = {
     'typst',
+    'markdown',
   },
   command = 'setlocal wrap'
 })
