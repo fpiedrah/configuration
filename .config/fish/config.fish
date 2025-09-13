@@ -15,7 +15,14 @@ alias tree="ls --tree"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-if test -f /Users/fpiedrah/.anaconda/bin/conda
-  eval /Users/fpiedrah/.anaconda/bin/conda "shell.fish" "hook" $argv | source
+if test -f /home/fpiedrah/.conda/bin/conda
+    eval /home/fpiedrah/.conda/bin/conda "shell.fish" "hook" $argv | source
+else
+    if test -f "/home/fpiedrah/.conda/etc/fish/conf.d/conda.fish"
+        . "/home/fpiedrah/.conda/etc/fish/conf.d/conda.fish"
+    else
+        set -x PATH "/home/fpiedrah/.conda/bin" $PATH
+    end
 end
 # <<< conda initialize <<<
+

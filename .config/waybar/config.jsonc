@@ -1,0 +1,49 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "margin-top": 15,
+    "modules-left": [
+        "pulseaudio", 
+        "hyprland/window"
+    ],
+    "modules-center": [
+        "hyprland/workspaces"
+    ],
+    "modules-right": [
+        "clock"
+    ],
+    "clock": {
+        "format": "{:%I:%M %p}",
+        "format-alt": "{:%a, %d. %b  %I:%M %p}"
+    },
+    "pulseaudio": {
+        "format": "vol: {volume}%",
+        "format-bluetooth": "blu: {volume}%",
+        "format-muted": "vol: muted",
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "ignored-sinks": ["Easy Effects Sink"]
+    },
+    "hyprland/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9"
+        },
+        "sort-by-number": true
+    },
+    "hyprland/window": {
+        "format": "<span>{class}</span>",
+        "max-length": 50,
+        "tooltip": true
+    }
+}
