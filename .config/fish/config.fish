@@ -5,6 +5,17 @@ set -g fish_greeting
 fish_add_path /opt/homebrew/bin
 fish_add_path /Library/TeX/texbin
 
+
+# Color for the current selection when searching history
+set -U fish_color_search_match --background=brblue
+
+# Color for matching text in history search
+set -U fish_color_history_current --bold
+
+# Color for the prefix match in history
+set -U fish_color_selection white --bold --background=blue
+
+
 # Aliases
 alias v="nvim"
 alias vi="nvim"

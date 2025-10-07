@@ -1,6 +1,5 @@
 local function configuration()
   local mason = require('mason')
-  local lspconfig = require('lspconfig')
   local mason_lspconfig = require('mason-lspconfig')
 
   mason.setup {
@@ -39,10 +38,11 @@ local function configuration()
     vim.lsp.protocol.make_client_capabilities()
   )
 
+  -- Changed this loop to use vim.lsp.config instead of lspconfig[lsp].setup
   for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup {
+    vim.lsp.config(lsp, {
       capabilities = capabilities,
-    }
+    })
   end
 end
 
