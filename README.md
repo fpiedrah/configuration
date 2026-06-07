@@ -17,26 +17,30 @@ This repo contains my daily shell, editor, terminal, and Hyprland desktop config
 
 ## Install
 
-Clone the repo, then symlink it into your home directory with Stow.
+Each app is its own Stow package, with the in-package path mirroring `$HOME`
+(e.g. `nvim/.config/nvim`). Clone the repo, then stow the packages you want.
 
 ```sh
 git clone <your-repo-url> ~/configuration
 cd ~/configuration
-stow --target="$HOME" .
+stow --target="$HOME" nvim fish tmux kitty hypr waybar wofi lsd
 ```
+
+Stow one package at a time (`stow nvim`) or all of them at once
+(`stow --target="$HOME" */`).
 
 ## Hyprland on a new machine
 
 The Hyprland config is self-contained and portable:
 
 - Monitors default to `monitor = , preferred, auto, 1`, which works on any display.
-- The wallpaper ships in the repo (`.config/hypr/wallpaper.jpg`), referenced by a `~/.config` path.
+- The wallpaper ships in the repo (`hypr/.config/hypr/wallpaper.jpg`), referenced by a `~/.config` path.
 - `hyprlock` is a minimal clock + password screen with no external scripts.
 
 ### Per-machine screen layout
 
 Each machine's monitor/workspace layout lives in its own **committed** file under
-`.config/hypr/hosts/` (e.g. `desktop.conf`, `laptop.conf`), so a wipe/reset restores
+`hypr/.config/hypr/hosts/` (e.g. `desktop.conf`, `laptop.conf`), so a wipe/reset restores
 it straight from git. `hyprland.conf` always sources `hosts/active.conf`, which is a
 **gitignored symlink** pointing at the current machine's file.
 

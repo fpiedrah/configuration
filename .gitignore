@@ -1,11 +1,11 @@
-.config/fish/functions/**
-.config/fish/completions/**
-.config/fish/conf.d/**
+fish/.config/fish/functions/**
+fish/.config/fish/completions/**
+fish/.config/fish/conf.d/**
 
-.config/fish/fish_variables
-.config/fish/fish_plugins
+fish/.config/fish/fish_variables
+fish/.config/fish/fish_plugins
 
-.config/tmux/plugins/**
+tmux/.config/tmux/plugins/**
 
 # Hyprland: host files are committed; only the active-host symlink is per-machine
-.config/hypr/hosts/active.conf
+hypr/.config/hypr/hosts/active.conf
