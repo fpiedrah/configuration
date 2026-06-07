@@ -25,7 +25,30 @@ cd ~/configuration
 stow --target="$HOME" .
 ```
 
+## Hyprland on a new machine
+
+The Hyprland config is self-contained and portable:
+
+- Monitors default to `monitor = , preferred, auto, 1`, which works on any display.
+- The wallpaper ships in the repo (`.config/hypr/wallpaper.jpg`), referenced by a `~/.config` path.
+- `hyprlock` is a minimal clock + password screen with no external scripts.
+
+### Per-machine screen layout
+
+Each machine's monitor/workspace layout lives in its own **committed** file under
+`.config/hypr/hosts/` (e.g. `desktop.conf`, `laptop.conf`), so a wipe/reset restores
+it straight from git. `hyprland.conf` always sources `hosts/active.conf`, which is a
+**gitignored symlink** pointing at the current machine's file.
+
+After `stow` on a machine, point `active.conf` at the right host file once:
+
+```sh
+ln -sf desktop.conf ~/.config/hypr/hosts/active.conf   # or laptop.conf, etc.
+```
+
+A new machine without a host file yet just uses the generic monitor default until
+you add one.
+
 ## Notes
 
 - This setup is primarily tailored for a Linux/Hyprland environment.
-- Some config values are machine-specific and may need small local adjustments.

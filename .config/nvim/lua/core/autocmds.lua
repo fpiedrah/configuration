@@ -1,10 +1,9 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
--- Set indentation to 2 spaces
-augroup('setIndent', { clear = true })
-autocmd('Filetype', {
-  group = 'setIndent',
+-- Use 2-space indentation for these filetypes.
+autocmd('FileType', {
+  group = augroup('set_indent', { clear = true }),
   pattern = {
     'xml',
     'html',
@@ -14,25 +13,38 @@ autocmd('Filetype', {
     'javascript',
     'typescript',
     'yaml',
-    'lua',
     'groovy',
     'typst',
+    'lua',
   },
-  command = 'setlocal shiftwidth=2 tabstop=2'
+  callback = function()
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.tabstop = 2
+  end,
 })
 
--- Enable text wrapping at line end
-augroup('setWrap', { clear = true })
-autocmd('Filetype', {
-  group = 'setWrap',
-  pattern = {
-    'typst',
-    'markdown',
-  },
-  command = 'setlocal wrap'
+-- Soft-wrap prose filetypes.
+autocmd('FileType', {
+  group = augroup('set_wrap', { clear = true }),
+  pattern = { 'typst', 'markdown' },
+  callback = function()
+    vim.opt_local.wrap = true
+  end,
 })
 
-autocmd({ "BufRead", "BufNewFile" }, {
-  pattern = "*.nf",
-  command = "setfiletype groovy",
+-- Treat Nextflow scripts as Groovy.
+autocmd({ 'BufRead', 'BufNewFile' }, {
+  group = augroup('nextflow_filetype', { clear = true }),
+  pattern = '*.nf',
+  callback = function()
+    vim.bo.filetype = 'groovy'
+  end,
+})
+
+-- Briefly highlight text on yank.
+autocmd('TextYankPost', {
+  group = augroup('highlight_yank', { clear = true }),
+  callback = function()
+    (vim.hl or vim.highlight).on_yank()
+  end,
 })

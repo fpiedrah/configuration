@@ -1,4 +1,4 @@
-function configuration()
+local function configuration()
   local cmp = require('cmp')
   local luasnip = require('luasnip')
   local lspkind = require('lspkind')
@@ -64,8 +64,9 @@ function configuration()
         option = {
           convert_case = true,
           loud = true,
-          -- INSTALL: sudo pacman -S cracklib
-          dict = '/usr/share/dict/cracklib-small',
+          -- Vendored in this repo at dict/cracklib-small; resolves to
+          -- ~/.config/nvim/dict/cracklib-small on every machine.
+          dict = vim.fn.stdpath('config') .. '/dict/cracklib-small',
         }
       }
     },
@@ -74,6 +75,7 @@ end
 
 return {
   'hrsh7th/nvim-cmp',
+  event = 'InsertEnter',
   dependencies = {
       'L3MON4D3/LuaSnip',
       'hrsh7th/cmp-nvim-lsp',

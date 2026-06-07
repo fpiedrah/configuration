@@ -4,7 +4,7 @@ set -g fish_greeting
 # Add Brew To Path
 fish_add_path /opt/homebrew/bin
 fish_add_path /Library/TeX/texbin
-
+fish_add_path /home/fpiedrah/.opencode/bin
 
 # Color for the current selection when searching history
 set -U fish_color_search_match --background=brblue
@@ -15,13 +15,12 @@ set -U fish_color_history_current --bold
 # Color for the prefix match in history
 set -U fish_color_selection white --bold --background=blue
 
-
 # Aliases
 alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 
-alias ls="lsd"
+alias ls="lsd -l --group-dirs first --permission disable --blocks name,size"
 alias tree="ls --tree"
 
 # >>> conda initialize >>>
@@ -36,4 +35,3 @@ else
     end
 end
 # <<< conda initialize <<<
-

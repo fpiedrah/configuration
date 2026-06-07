@@ -9,5 +9,6 @@ end
 return {
   'phaazon/hop.nvim',
   branch = 'v2',
+  cmd = { 'HopWord', 'HopLine', 'HopChar1', 'HopChar2', 'HopPattern' },
   config = configuration,
 }

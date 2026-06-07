@@ -6,3 +6,6 @@
 .config/fish/fish_plugins
 
 .config/tmux/plugins/**
+
+# Hyprland: host files are committed; only the active-host symlink is per-machine
+.config/hypr/hosts/active.conf
