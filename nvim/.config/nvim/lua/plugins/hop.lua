@@ -7,8 +7,7 @@ local function configuration()
 end
 
 return {
-  'phaazon/hop.nvim',
-  branch = 'v2',
+  'yuki-yano/hop.nvim',
   cmd = { 'HopWord', 'HopLine', 'HopChar1', 'HopChar2', 'HopPattern' },
   config = configuration,
 }

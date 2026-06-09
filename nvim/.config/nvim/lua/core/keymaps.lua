@@ -34,3 +34,6 @@ map('n', '<leader>fb', '<cmd>Telescope buffers<CR>', { desc = 'Find buffers' })
 
 -- Hop
 map('n', '<leader>hh', '<cmd>HopWord<CR>', { desc = 'Hop to word' })
+
+-- Oil
+map('n', '<leader>oo', '<cmd>Oil<CR>', { desc = 'Open parent directory (Oil)' })

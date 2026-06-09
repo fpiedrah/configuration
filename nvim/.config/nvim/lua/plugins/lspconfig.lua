@@ -4,7 +4,7 @@ local servers = {
   'jsonls',
   'julials',
   'lemminx',
-  'ltex',
+  'ltex_plus',
   'lua_ls',
   'marksman',
   'ruff',
