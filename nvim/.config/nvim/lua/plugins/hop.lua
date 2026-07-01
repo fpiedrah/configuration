@@ -7,7 +7,7 @@ local function configuration()
 end
 
 return {
-  'yuki-yano/hop.nvim',
+  'smoka7/hop.nvim',
   cmd = { 'HopWord', 'HopLine', 'HopChar1', 'HopChar2', 'HopPattern' },
   config = configuration,
 }

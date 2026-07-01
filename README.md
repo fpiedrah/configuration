@@ -1,58 +1,59 @@
 # configuration
 
-Personal dotfiles managed with GNU Stow.
-
-This repo contains my daily shell, editor, terminal, and Hyprland desktop configuration.
-
-## Included
-
-- `nvim` - Neovim setup with `lazy.nvim` and plugin-based config
-- `fish` - shell aliases, paths, and interactive shell settings
-- `tmux` - custom prefix, pane navigation, and TPM plugins
-- `kitty` - terminal settings and theme include
-- `hypr` - Hyprland, Hyprpaper, and Hyprlock config
-- `waybar` - top bar layout and modules
-- `wofi` - launcher config
-- `lsd` - `lsd` defaults
-
 ## Install
 
-Each app is its own Stow package, with the in-package path mirroring `$HOME`
-(e.g. `nvim/.config/nvim`). Clone the repo, then stow the packages you want.
-
 ```sh
-git clone <your-repo-url> ~/configuration
+git clone git@github.com:fpiedrah/configuration.git ~/configuration
 cd ~/configuration
-stow --target="$HOME" nvim fish tmux kitty hypr waybar wofi lsd
+
+stow --target="$HOME" \
+  nvim \
+  zsh \
+  tmux \
+  kitty \
+  hypr \
+  waybar \
+  wofi \
+  lsd
 ```
 
-Stow one package at a time (`stow nvim`) or all of them at once
-(`stow --target="$HOME" */`).
-
-## Hyprland on a new machine
-
-The Hyprland config is self-contained and portable:
-
-- Monitors default to `monitor = , preferred, auto, 1`, which works on any display.
-- The wallpaper ships in the repo (`hypr/.config/hypr/wallpaper.jpg`), referenced by a `~/.config` path.
-- `hyprlock` is a minimal clock + password screen with no external scripts.
-
-### Per-machine screen layout
-
-Each machine's monitor/workspace layout lives in its own **committed** file under
-`hypr/.config/hypr/hosts/` (e.g. `desktop.conf`, `laptop.conf`), so a wipe/reset restores
-it straight from git. `hyprland.conf` always sources `hosts/active.conf`, which is a
-**gitignored symlink** pointing at the current machine's file.
-
-After `stow` on a machine, point `active.conf` at the right host file once:
+## Dependencies
 
 ```sh
-ln -sf desktop.conf ~/.config/hypr/hosts/active.conf   # or laptop.conf, etc.
+# CLI tools on conda-forge
+pixi global install \
+  stow \
+  nvim \
+  tmux \
+  zsh \
+  fish \
+  kitty \
+  rust \
+  nodejs
+
+# not on conda-forge, build via cargo
+cargo install lsd
+
+# Waybar/Wofi ship in Fedora's repos; Hyprland needs a COPR
+sudo dnf install waybar wofi
+sudo dnf copr enable solopasha/hyprland
+sudo dnf install hyprland
+
+# Oh My Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Powerlevel10k theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git \
+  "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
+
+# zsh plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions \
+  "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions"
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+  "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+
+# tmux plugin manager (install plugins with prefix + I after)
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
 
-A new machine without a host file yet just uses the generic monitor default until
-you add one.
-
-## Notes
-
-- This setup is primarily tailored for a Linux/Hyprland environment.
