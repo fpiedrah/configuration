@@ -67,6 +67,15 @@ local function configuration()
     capabilities = capabilities,
   })
 
+  -- LTeX ships 'typst' in its default filetypes but has no Typst parser, so it
+  -- grammar-checks markup and identifiers as if they were prose. Leave Typst to
+  -- tinymist. (Rebuilt, not patched: vim.lsp.config deep-merges lists by index.)
+  vim.lsp.config('ltex_plus', {
+    filetypes = vim.tbl_filter(function(ft)
+      return ft ~= 'typst'
+    end, vim.lsp.config.ltex_plus.filetypes),
+  })
+
   vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp_attach', { clear = true }),
     callback = function(event)

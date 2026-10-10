@@ -13,6 +13,15 @@ plugins=(
 )
 source $ZSH/oh-my-zsh.sh
 
+export PATH="$HOME/.local/bin:$PATH"
+
+# Pixi
+export PATH="$HOME/.pixi/bin:$PATH"
+
+# Terminal/tab title: current directory only (oh-my-zsh defaults to user@host:full/path)
+ZSH_THEME_TERM_TITLE_IDLE='%1~'
+ZSH_THEME_TERM_TAB_TITLE_IDLE='%1~'
+
 # Exports
 export PATH="$(npm prefix -g)/bin:$PATH"
 
@@ -48,6 +57,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
-# opencode
-export PATH="$HOME/.opencode/bin:$PATH"
