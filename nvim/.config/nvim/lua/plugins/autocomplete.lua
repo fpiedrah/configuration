@@ -64,8 +64,7 @@ local function configuration()
         option = {
           convert_case = true,
           loud = true,
-          -- Vendored in this repo at dict/cracklib-small; resolves to
-          -- ~/.config/nvim/dict/cracklib-small on every machine.
+          -- Vendored Dictionary
           dict = vim.fn.stdpath('config') .. '/dict/cracklib-small',
         }
       }

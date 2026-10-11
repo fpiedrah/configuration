@@ -27,7 +27,7 @@ opt.wrap = false            -- Don't wrap long lines by default
 opt.termguicolors = true    -- Enable 24-bit RGB colors
 opt.laststatus = 3          -- Single global statusline
 
--- Tabs, indent
+-- Tabs, Indent
 opt.expandtab = true        -- Use spaces instead of tabs
 opt.shiftwidth = 4          -- Indent by 4 spaces
 opt.tabstop = 4             -- A tab counts as 4 spaces
@@ -42,7 +42,7 @@ opt.updatetime = 250        -- Faster CursorHold events / quicker diagnostics
 -- Startup
 opt.shortmess:append('sI')  -- Skip intro and search-count messages
 
--- Disable unused built-in plugins
+-- Disable Unused Built-In Plugins
 local disabled_built_ins = {
   'netrw',
   'netrwPlugin',

@@ -17,24 +17,24 @@ local servers = {
   'zls',
 }
 
--- Buffer-local keymaps, set once an LSP client attaches to a buffer.
+-- LSP Keymaps
 local function on_attach(_, bufnr)
   local function map(lhs, rhs, desc)
     vim.keymap.set('n', lhs, rhs, { buffer = bufnr, silent = true, desc = 'LSP: ' .. desc })
   end
 
-  map('gd', vim.lsp.buf.definition, 'Go to definition')
-  map('gD', vim.lsp.buf.declaration, 'Go to declaration')
-  map('gi', vim.lsp.buf.implementation, 'Go to implementation')
-  map('gr', vim.lsp.buf.references, 'List references')
-  map('K', vim.lsp.buf.hover, 'Hover documentation')
-  map('<leader>k', vim.lsp.buf.signature_help, 'Signature help')
-  map('<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
-  map('<leader>ca', vim.lsp.buf.code_action, 'Code action')
-  map('<leader>d', vim.diagnostic.open_float, 'Line diagnostics')
-  map('[d', function() vim.diagnostic.jump({ count = -1, float = true }) end, 'Previous diagnostic')
-  map(']d', function() vim.diagnostic.jump({ count = 1, float = true }) end, 'Next diagnostic')
-  map('<leader>lf', function() vim.lsp.buf.format({ async = true }) end, 'Format buffer')
+  map('gd', vim.lsp.buf.definition, 'Go to Definition')
+  map('gD', vim.lsp.buf.declaration, 'Go to Declaration')
+  map('gi', vim.lsp.buf.implementation, 'Go to Implementation')
+  map('gr', vim.lsp.buf.references, 'List References')
+  map('K', vim.lsp.buf.hover, 'Hover Documentation')
+  map('<leader>k', vim.lsp.buf.signature_help, 'Signature Help')
+  map('<leader>rn', vim.lsp.buf.rename, 'Rename Symbol')
+  map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
+  map('<leader>d', vim.diagnostic.open_float, 'Line Diagnostics')
+  map('[d', function() vim.diagnostic.jump({ count = -1, float = true }) end, 'Previous Diagnostic')
+  map(']d', function() vim.diagnostic.jump({ count = 1, float = true }) end, 'Next Diagnostic')
+  map('<leader>lf', function() vim.lsp.buf.format({ async = true }) end, 'Format Buffer')
 end
 
 local function configuration()
@@ -52,24 +52,22 @@ local function configuration()
     ensure_installed = servers,
   })
 
-  -- Diagnostics presentation.
+  -- Diagnostics
   vim.diagnostic.config({
     virtual_text = true,
     severity_sort = true,
     float = { border = 'rounded', source = true },
   })
 
-  -- Capabilities advertised to every server (adds nvim-cmp completion support).
+  -- Completion Capabilities
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-  -- Apply shared defaults to all servers; mason-lspconfig enables them automatically.
+  -- Shared Server Defaults
   vim.lsp.config('*', {
     capabilities = capabilities,
   })
 
-  -- LTeX ships 'typst' in its default filetypes but has no Typst parser, so it
-  -- grammar-checks markup and identifiers as if they were prose. Leave Typst to
-  -- tinymist. (Rebuilt, not patched: vim.lsp.config deep-merges lists by index.)
+  -- Leave Typst to tinymist
   vim.lsp.config('ltex_plus', {
     filetypes = vim.tbl_filter(function(ft)
       return ft ~= 'typst'

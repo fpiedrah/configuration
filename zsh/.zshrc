@@ -1,4 +1,4 @@
-# Enable Powerlevel10k instant prompt (must stay near the top).
+# Powerlevel10k Instant Prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -13,19 +13,22 @@ plugins=(
 )
 source $ZSH/oh-my-zsh.sh
 
+# Deduplicate PATH
+typeset -U path PATH
+
 export PATH="$HOME/.local/bin:$PATH"
 
 # Pixi
-export PATH="$HOME/.pixi/bin:$PATH"
+[[ -d "$HOME/.pixi/bin" ]] && export PATH="$HOME/.pixi/bin:$PATH"
 
-# Terminal/tab title: current directory only (oh-my-zsh defaults to user@host:full/path)
+# Terminal Title
 ZSH_THEME_TERM_TITLE_IDLE='%1~'
 ZSH_THEME_TERM_TAB_TITLE_IDLE='%1~'
 
 # Exports
-export PATH="$(npm prefix -g)/bin:$PATH"
+command -v npm >/dev/null && export PATH="$(npm prefix -g)/bin:$PATH"
 
-# Use home-backed scratch instead of the shared, often-full root /tmp
+# Home-Backed TMPDIR
 export TMPDIR="$HOME/.tmp"
 [[ -d "$TMPDIR" ]] || mkdir -p "$TMPDIR"
 
@@ -37,23 +40,29 @@ alias v="nvim"
 alias vi="nvim"
 alias vim="nvim"
 
-# Rust/cargo-installed binaries (e.g. lsd)
+# Ctrl+Backspace Deletes Word
+bindkey '^H' backward-kill-word
+
+# Cargo Binaries
 export PATH="$HOME/.cargo/bin:$PATH"
 
-# Powerlevel10k prompt config (run `p10k configure` to regenerate)
+# Powerlevel10k Config
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOME/.anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "$HOME/.anaconda/etc/profile.d/conda.sh" ]; then
-        . "$HOME/.anaconda/etc/profile.d/conda.sh"
-    else
-        export PATH="$HOME/.anaconda/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+# Conda
+for __conda_root in "$HOME/.conda" "$HOME/.anaconda"; do
+  [[ -x "$__conda_root/bin/conda" ]] || continue
+  __conda_setup="$("$__conda_root/bin/conda" 'shell.zsh' 'hook' 2> /dev/null)"
+  if [ $? -eq 0 ]; then
+      eval "$__conda_setup"
+  elif [ -f "$__conda_root/etc/profile.d/conda.sh" ]; then
+      . "$__conda_root/etc/profile.d/conda.sh"
+  else
+      export PATH="$__conda_root/bin:$PATH"
+  fi
+  break
+done
+unset __conda_root __conda_setup
+
+# opencode
+[[ -d "$HOME/.opencode/bin" ]] && export PATH="$HOME/.opencode/bin:$PATH"

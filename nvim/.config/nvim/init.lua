@@ -1,4 +1,4 @@
--- Leader keys must be set before plugins load so mappings register correctly.
+-- Leader Before Plugins
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 

@@ -1,52 +1,58 @@
--- Thin wrapper around vim.keymap.set with sensible defaults.
+-- Keymap Helper
 local function map(mode, lhs, rhs, opts)
   opts = vim.tbl_extend('force', { noremap = true, silent = true }, opts or {})
   vim.keymap.set(mode, lhs, rhs, opts)
 end
 
--- Clear search highlighting
-map('n', '<leader>c', '<cmd>nohlsearch<CR>', { desc = 'Clear search highlight' })
+-- Clear Search Highlighting
+map('n', '<leader>c', '<cmd>nohlsearch<CR>', { desc = 'Clear Search Highlight' })
+
+-- Window Focus
+map('n', '<leader>wh', '<C-w>h', { desc = 'Go to Left Window' })
+map('n', '<leader>wj', '<C-w>j', { desc = 'Go to Lower Window' })
+map('n', '<leader>wk', '<C-w>k', { desc = 'Go to Upper Window' })
+map('n', '<leader>wl', '<C-w>l', { desc = 'Go to Right Window' })
+
+-- Window Move
+map('n', '<leader>wH', '<C-w>H', { desc = 'Move Window Left' })
+map('n', '<leader>wJ', '<C-w>J', { desc = 'Move Window Down' })
+map('n', '<leader>wK', '<C-w>K', { desc = 'Move Window Up' })
+map('n', '<leader>wL', '<C-w>L', { desc = 'Move Window Right' })
 
 -- Splits
-map('n', '<leader>wo', '<C-w>n', { desc = 'New split' })
-map('n', '<leader>we', '<C-w>v', { desc = 'Split vertically' })
-map('n', '<leader>wt', '<cmd>vert term<CR>', { desc = 'Vertical terminal split' })
+map('n', '<leader>ws', '<C-w>s', { desc = 'Split Below' })
+map('n', '<leader>wv', '<C-w>v', { desc = 'Split Vertically' })
+map('n', '<leader>wt', '<cmd>vert term<CR>', { desc = 'Vertical Terminal Split' })
 
--- hjkl, not arrows. The EDIT-layer arrows are the better cluster — one hand,
--- four adjacent fingers, in direction order — but a <leader>w sequence restarts
--- on every press, so the thumb hold is paid every time and never amortises:
--- measured 5.7 -> 7.2 effort for one window move. tmux keeps the arrows because
--- -r holds the layer open across a run and it crosses over at two presses.
-map('n', '<leader>wh', '<C-w>h', { desc = 'Go to left window' })
-map('n', '<leader>wj', '<C-w>j', { desc = 'Go to lower window' })
-map('n', '<leader>wk', '<C-w>k', { desc = 'Go to upper window' })
-map('n', '<leader>wl', '<C-w>l', { desc = 'Go to right window' })
-map('n', '<leader>wc', '<C-w>c', { desc = 'Close window' })
+-- Window Close / Fullscreen
+map('n', '<leader>wq', '<C-w>q', { desc = 'Close Window' })
+map('n', '<leader>wf', '<C-w>_<C-w>|', { desc = 'Fullscreen Window' })
+map('n', '<leader>w=', '<C-w>=', { desc = 'Equalize Windows' })
 
--- Save / quit
-map('n', '<leader>s', '<cmd>write<CR>', { desc = 'Save file' })
--- Not <leader>x: x is a 30 ms two-key combo on this keyboard, the tightest
--- window in the keymap, and a combo that fires early cannot fail safe.
-map('n', '<leader>q', '<cmd>qa!<CR>', { desc = 'Quit all (no save)' })
+-- Save / Quit
+map('n', '<leader>s', '<cmd>write<CR>', { desc = 'Save File' })
+map('n', '<leader>Q', '<cmd>qa<CR>', { desc = 'Quit All' })
 
 -- Terminal
-map('n', '<leader>t', '<cmd>terminal<CR>', { desc = 'Open terminal' })
-map('t', '<Esc>', '<C-\\><C-n>', { desc = 'Terminal: exit to normal mode' })
-map('t', 'fd', '<C-\\><C-n>', { desc = 'Terminal: exit to normal mode' })
+map('n', '<leader>t', '<cmd>terminal<CR>', { desc = 'Open Terminal' })
+map('t', '<Esc>', '<C-\\><C-n>', { desc = 'Terminal: Exit to Normal Mode' })
+map('t', 'fd', '<C-\\><C-n>', { desc = 'Terminal: Exit to Normal Mode' })
 
--- Escape lives behind a thumb hold on EDIT, and modal editing presses it more
--- than most letters. fd is a cross-hand roll on the base layer, same idea as
--- the terminal-mode binding above.
-map('i', 'fd', '<Esc>', { desc = 'Exit insert mode' })
-map('v', 'fd', '<Esc>', { desc = 'Exit visual mode' })
+-- Escape with fd
+map('i', 'fd', '<Esc>', { desc = 'Exit Insert Mode' })
+map('v', 'fd', '<Esc>', { desc = 'Exit Visual Mode' })
+
+-- Ctrl+Backspace Deletes Word
+map('i', '<C-BS>', '<C-w>', { desc = 'Delete Word Backward' })
+map('i', '<C-h>', '<C-w>', { desc = 'Delete Word Backward' })
 
 -- Telescope
-map('n', '<leader>ff', '<cmd>Telescope find_files<CR>', { desc = 'Find files' })
-map('n', '<leader>fg', '<cmd>Telescope live_grep<CR>', { desc = 'Live grep' })
-map('n', '<leader>fb', '<cmd>Telescope buffers<CR>', { desc = 'Find buffers' })
+map('n', '<leader>ff', '<cmd>Telescope find_files<CR>', { desc = 'Find Files' })
+map('n', '<leader>fg', '<cmd>Telescope live_grep<CR>', { desc = 'Live Grep' })
+map('n', '<leader>fb', '<cmd>Telescope buffers<CR>', { desc = 'Find Buffers' })
 
 -- Hop
-map('n', '<leader>hh', '<cmd>HopWord<CR>', { desc = 'Hop to word' })
+map('n', '<leader>hh', '<cmd>HopWord<CR>', { desc = 'Hop to Word' })
 
 -- Oil
-map('n', '<leader>oo', '<cmd>Oil<CR>', { desc = 'Open parent directory (Oil)' })
+map('n', '<leader>oo', '<cmd>Oil<CR>', { desc = 'Open Parent Directory (Oil)' })

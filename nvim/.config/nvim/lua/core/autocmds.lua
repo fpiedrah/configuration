@@ -1,7 +1,7 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
--- Use 2-space indentation for these filetypes.
+-- 2-Space Indentation
 autocmd('FileType', {
   group = augroup('set_indent', { clear = true }),
   pattern = {
@@ -23,7 +23,7 @@ autocmd('FileType', {
   end,
 })
 
--- Soft-wrap prose filetypes.
+-- Soft-Wrap Prose
 autocmd('FileType', {
   group = augroup('set_wrap', { clear = true }),
   pattern = { 'typst', 'markdown' },
@@ -32,7 +32,7 @@ autocmd('FileType', {
   end,
 })
 
--- Treat Nextflow scripts as Groovy.
+-- Nextflow as Groovy
 autocmd({ 'BufRead', 'BufNewFile' }, {
   group = augroup('nextflow_filetype', { clear = true }),
   pattern = '*.nf',
@@ -41,7 +41,7 @@ autocmd({ 'BufRead', 'BufNewFile' }, {
   end,
 })
 
--- Briefly highlight text on yank.
+-- Highlight on Yank
 autocmd('TextYankPost', {
   group = augroup('highlight_yank', { clear = true }),
   callback = function()
