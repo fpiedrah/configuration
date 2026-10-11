@@ -2,3 +2,4 @@ tmux/.config/tmux/plugins/**
 
 # Hyprland: host files are committed; only the active-host symlink is per-machine
 hypr/.config/hypr/hosts/active.conf
+hypr/.config/hypr/hosts/active.lua
