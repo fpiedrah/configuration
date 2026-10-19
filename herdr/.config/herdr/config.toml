@@ -1,0 +1,59 @@
+onboarding = false
+# Shell
+[terminal]
+default_shell = "/bin/zsh"
+new_cwd = "follow"
+
+# Mouse and Clipboard
+[ui]
+mouse_capture = true
+copy_on_select = true
+prompt_new_tab_name = false
+
+# Theme
+[theme]
+name = "dracula"
+
+auto_switch = false
+[keys]
+# Prefix to Ctrl-Space
+prefix = "ctrl+space"
+
+# Pane Focus
+focus_pane_left = "prefix+h"
+focus_pane_down = "prefix+j"
+focus_pane_up = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# Pane Swap
+swap_pane_left = "prefix+shift+h"
+swap_pane_down = "prefix+shift+j"
+swap_pane_up = "prefix+shift+k"
+swap_pane_right = "prefix+shift+l"
+
+# Pane Resize
+resize_pane_left = "prefix+ctrl+h"
+resize_pane_down = "prefix+ctrl+j"
+resize_pane_up = "prefix+ctrl+k"
+resize_pane_right = "prefix+ctrl+l"
+
+# Pane Splitting
+split_horizontal = "prefix+s"
+split_vertical = "prefix+v"
+
+# Pane Closing
+close_pane = "prefix+q"
+close_workspace = "prefix+shift+q"
+
+# Pane Fullscreen
+zoom = "prefix+f"
+
+# New Tab
+new_tab = "prefix+t"
+
+# Moved Off Conflicting Keys
+settings = "prefix+shift+s"
+detach = "prefix+d"
+
+[ui.toast]
+delivery = "herdr"

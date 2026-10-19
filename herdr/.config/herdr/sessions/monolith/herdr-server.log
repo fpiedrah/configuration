@@ -1,0 +1,32 @@
+2026-10-19T01:32:01.044796Z  INFO herdr::api::server: api server listening path=/home/fpiedrah/.config/herdr/sessions/monolith/herdr.sock
+2026-10-19T01:32:01.045752Z  INFO herdr::persist::io: session file is missing event="persist.restore" subsystem="persist" outcome="missing" path=/home/fpiedrah/.config/herdr/sessions/monolith/session.json
+2026-10-19T01:32:01.045844Z  INFO herdr::app: using pane scrollback configuration pane_scrollback_limit_bytes=10000000
+2026-10-19T01:32:01.131381Z  INFO herdr::logging: checking for updates event="update.check.start" subsystem="update" outcome="started"
+2026-10-19T01:32:01.132329Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=1 rows=40 cols=119 scrollback_limit_bytes=10000000
+2026-10-19T01:32:01.133573Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=1 pid=1718954
+2026-10-19T01:32:01.134043Z  INFO herdr::logging: workspace created event="workspace.create" subsystem="workspace" outcome="ok" workspace_id="w1" pane_id=1
+2026-10-19T01:32:01.134059Z  INFO herdr::logging: workspace focused event="workspace.focus" subsystem="workspace" outcome="ok" workspace_id="w1"
+2026-10-19T01:32:01.134084Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-19T01:32:01.134094Z  INFO herdr::server::headless::bootstrap: created startup workspace cwd=/home/fpiedrah
+2026-10-19T01:32:01.134214Z  INFO herdr::server::headless: client protocol socket listening path=/home/fpiedrah/.config/herdr/sessions/monolith/herdr-client.sock
+2026-10-19T01:32:01.134255Z  INFO herdr::server::headless::bootstrap: herdr server started api_socket=/home/fpiedrah/.config/herdr/sessions/monolith/herdr.sock client_socket=/home/fpiedrah/.config/herdr/sessions/monolith/herdr-client.sock
+2026-10-19T01:32:01.134351Z  INFO herdr::logging: herdr starting event="app.startup" subsystem="server" outcome="started" pid=1718928
+2026-10-19T01:32:01.184344Z  INFO herdr::server::headless: client connected client_id=2 cols=225 rows=61 cell_width_px=10 cell_height_px=21 surface_active=true render_encoding=SemanticFrame
+2026-10-19T01:32:06.162775Z  INFO herdr::persist::writer: preserved session recovery copy event="persist.backup" subsystem="persist" outcome="ok" path=/home/fpiedrah/.config/herdr/sessions/monolith/session.json backup_path=/home/fpiedrah/.config/herdr/sessions/monolith/session-snapshots/session-000000000000000000001792373526147929191-1718928-0.json
+2026-10-19T01:32:06.162837Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/fpiedrah/.config/herdr/sessions/monolith/session.json workspaces=1
+2026-10-19T01:32:14.959266Z  INFO herdr::logging: integration action finished event="integration.action" subsystem="integration" outcome="ok" action="install" target="claude"
+2026-10-19T01:32:14.965336Z  INFO herdr::logging: integration action finished event="integration.action" subsystem="integration" outcome="ok" action="install" target="opencode"
+2026-10-19T01:32:14.971765Z  INFO herdr::logging: integration action finished event="integration.action" subsystem="integration" outcome="ok" action="install" target="hermes"
+2026-10-19T01:33:01.833971Z  INFO herdr::logging: spawning pane terminal event="pane.spawn.start" subsystem="pane" outcome="started" pane_id=2 rows=59 cols=109 scrollback_limit_bytes=10000000
+2026-10-19T01:33:01.835487Z  INFO herdr::logging: pane child spawned event="pane.spawned" subsystem="pane" outcome="ok" pane_id=2 pid=1719268
+2026-10-19T01:33:01.835689Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-19T01:33:04.089499Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-19T01:33:04.089532Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-19T01:33:09.102879Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/fpiedrah/.config/herdr/sessions/monolith/session.json workspaces=1
+2026-10-19T01:33:25.675181Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-19T01:33:25.675223Z  INFO herdr::logging: tab focused event="tab.focus" subsystem="tab" outcome="ok" workspace_id="w1" tab_id="w1:t1"
+2026-10-19T01:33:30.688239Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/fpiedrah/.config/herdr/sessions/monolith/session.json workspaces=1
+2026-10-19T01:33:33.465233Z  INFO herdr::pane: agent changed pane=2 previous_agent=None agent=Some(Claude) process=claude pgid=Some(1719475)
+2026-10-19T01:33:36.778694Z  INFO herdr::pane: agent changed pane=2 previous_agent=Some(Claude) agent=None pgid=Some(1719268)
+2026-10-19T01:33:42.795293Z  INFO herdr::pane: agent changed pane=2 previous_agent=None agent=Some(Claude) process=claude pgid=Some(1719532)
+2026-10-19T01:33:47.908740Z  INFO herdr::logging: session saved event="persist.save" subsystem="persist" outcome="ok" path=/home/fpiedrah/.config/herdr/sessions/monolith/session.json workspaces=1
