@@ -1,0 +1,234 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "crew config",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "defaultModel": {
+      "type": "string",
+      "description": "Key, or unique key prefix, of the model used when a call names none; the first model when unset"
+    },
+    "models": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "harness"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1,
+            "pattern": "[^/]$",
+            "description": "Model id passed to the harness with --model"
+          },
+          "harness": {
+            "enum": [
+              "pi",
+              "claude"
+            ],
+            "description": "CLI that runs the model"
+          },
+          "effort": {
+            "enum": [
+              "off",
+              "minimal",
+              "low",
+              "medium",
+              "high",
+              "xhigh",
+              "max"
+            ],
+            "description": "Default effort; pi takes off..max (default medium), claude takes low..max (default high)"
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1,
+            "description": "When to use this model; the only guidance the parent model gets"
+          },
+          "key": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9-]*$",
+            "description": "Name that picks the model; defaults to the id's last path segment, lowercased"
+          }
+        },
+        "additionalProperties": false
+      },
+      "description": "Models to delegate to, in the order the table lists them"
+    },
+    "maxDepth": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maxConcurrent": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "maxParked": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "heartbeatTimeoutMs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "pollMs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "previewChars": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "lingerMs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "widgetLines": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "tailLines": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "readyTimeoutMs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "startGraceMs": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "widget": {
+      "enum": [
+        "above",
+        "below",
+        "off"
+      ]
+    },
+    "piProjectTrust": {
+      "enum": [
+        "approve",
+        "ignore",
+        "ask"
+      ],
+      "description": "pi workers: approve trusts project-local files for the run (--approve), ignore skips them (--no-approve), ask leaves pi's trust dialog on"
+    },
+    "extraRules": {
+      "type": "string"
+    },
+    "text": {
+      "type": "object",
+      "properties": {
+        "herdrRequired": {
+          "type": "string"
+        },
+        "noMatch": {
+          "type": "string"
+        },
+        "killed": {
+          "type": "string"
+        },
+        "notActive": {
+          "type": "string"
+        },
+        "resultNotice": {
+          "type": "string"
+        },
+        "statusHeader": {
+          "type": "string"
+        },
+        "widgetHeader": {
+          "type": "string"
+        },
+        "widgetQueued": {
+          "type": "string"
+        },
+        "widgetDepth": {
+          "type": "string"
+        },
+        "widgetBlocked": {
+          "type": "string"
+        },
+        "widgetGone": {
+          "type": "string"
+        },
+        "widgetQueuePosition": {
+          "type": "string"
+        },
+        "widgetDone": {
+          "type": "string"
+        },
+        "widgetFailed": {
+          "type": "string"
+        },
+        "widgetCancelled": {
+          "type": "string"
+        },
+        "widgetAgo": {
+          "type": "string"
+        },
+        "widgetMore": {
+          "type": "string"
+        },
+        "statusBar": {
+          "type": "string"
+        },
+        "tailEmpty": {
+          "type": "string"
+        },
+        "tailHint": {
+          "type": "string"
+        },
+        "focusFailed": {
+          "type": "string"
+        },
+        "steered": {
+          "type": "string"
+        },
+        "steerBlocked": {
+          "type": "string"
+        },
+        "steerNested": {
+          "type": "string"
+        },
+        "steerQueued": {
+          "type": "string"
+        },
+        "steerUsage": {
+          "type": "string"
+        },
+        "notRunning": {
+          "type": "string"
+        },
+        "widgetAsking": {
+          "type": "string"
+        },
+        "widgetParked": {
+          "type": "string"
+        },
+        "widgetParkedCount": {
+          "type": "string"
+        },
+        "answered": {
+          "type": "string"
+        },
+        "answerQueued": {
+          "type": "string"
+        },
+        "answerNone": {
+          "type": "string"
+        },
+        "answerUsage": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

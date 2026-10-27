@@ -1,0 +1,141 @@
+{
+  "model": "opus",
+  "extraKnownMarketplaces": {
+    "obsidian-skills": {
+      "source": {
+        "source": "github",
+        "repo": "kepano/obsidian-skills"
+      }
+    }
+  },
+  "effortLevel": "xhigh",
+  "tui": "fullscreen",
+  "theme": "dark",
+  "statusLine": {
+    "type": "command",
+    "command": "sh \"$HOME\"/.claude/hooks/herdr-sidebar.sh"
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "^(startup|resume|clear|compact|fork)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$HOME\"/.claude/hooks/herdr-agent-state.sh session",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME\"/.pi/agent/extensions/crew/claude/crew hook session",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "\"$HOME\"/.pi/agent/extensions/crew/claude/crew hook wait",
+            "asyncRewake": true,
+            "timeout": 86400
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME\"/.pi/agent/extensions/crew/claude/crew hook pre",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME\"/.pi/agent/extensions/crew/claude/crew hook post",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME\"/.pi/agent/extensions/crew/claude/crew hook post",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME\"/.pi/agent/extensions/crew/claude/crew hook subagent-stop",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME\"/.pi/agent/extensions/crew/claude/crew hook sweep",
+            "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "\"$HOME\"/.pi/agent/extensions/crew/claude/crew hook wait",
+            "asyncRewake": true,
+            "timeout": 86400
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME\"/.pi/agent/extensions/crew/claude/crew hook sweep",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$HOME\"/.pi/agent/extensions/crew/claude/crew hook end",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  },
+  "permissions": {
+    "allow": [
+      "Bash(crew help)",
+      "Bash(crew status)",
+      "Bash(crew inbox)"
+    ]
+  }
+}

@@ -51,6 +51,17 @@ map('n', '<leader>ff', '<cmd>Telescope find_files<CR>', { desc = 'Find Files' })
 map('n', '<leader>fg', '<cmd>Telescope live_grep<CR>', { desc = 'Live Grep' })
 map('n', '<leader>fb', '<cmd>Telescope buffers<CR>', { desc = 'Find Buffers' })
 
+-- Dotfiles Picker: hidden + ignored files included, runtime noise excluded
+local function dotfiles()
+  require('telescope.builtin').find_files({
+    prompt_title = 'Dotfiles',
+    cwd = '~/Workspace/.configuration',
+    ignored = true,
+    exclude = { 'node_modules', '.pi/crew', '.pi/orchestra' },
+  })
+end
+map('n', '<leader>fd', dotfiles, { desc = 'Find Dotfiles' })
+
 -- Hop
 map('n', '<leader>hh', '<cmd>HopWord<CR>', { desc = 'Hop to Word' })
 

@@ -1,0 +1,2 @@
+#!/bin/sh
+exec node --no-warnings "$(dirname "$(readlink -f "$0")")/crew.ts" "$@"

@@ -1,0 +1,43 @@
+{
+  "$schema": "./extensions/crew/crew.schema.json",
+  "defaultModel": "glm",
+  "maxDepth": 4,
+  "maxConcurrent": 10,
+  "models": [
+    {
+      "key": "glm",
+      "id": "openrouter/z-ai/glm-5.3-flash",
+      "harness": "pi",
+      "effort": "medium",
+      "role": "Default, including coding"
+    },
+    {
+      "key": "mimo",
+      "id": "openrouter/xiaomi/mimo-v2.6-pro",
+      "harness": "pi",
+      "effort": "medium",
+      "role": "Long inputs, second opinion"
+    },
+    {
+      "key": "sonnet",
+      "id": "claude-sonnet-5-5",
+      "harness": "claude",
+      "effort": "high",
+      "role": "Coding GLM can't handle"
+    },
+    {
+      "key": "opus",
+      "id": "claude-opus-5-5",
+      "harness": "claude",
+      "effort": "high",
+      "role": "Hard tasks"
+    },
+    {
+      "key": "fable",
+      "id": "claude-fable-5-1",
+      "harness": "claude",
+      "effort": "high",
+      "role": "Only when asked"
+    }
+  ]
+}
