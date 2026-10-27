@@ -8,7 +8,7 @@
       }
     }
   },
-  "effortLevel": "xhigh",
+  "effortLevel": "high",
   "tui": "fullscreen",
   "theme": "dark",
   "statusLine": {
