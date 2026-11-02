@@ -6,4 +6,4 @@ require('core.options')
 require('core.keymaps')
 require('core.autocmds')
 
-require('manager')
+require('core.plugin_manager')

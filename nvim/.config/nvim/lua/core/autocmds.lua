@@ -26,18 +26,9 @@ autocmd('FileType', {
 -- Soft-Wrap Prose
 autocmd('FileType', {
   group = augroup('set_wrap', { clear = true }),
-  pattern = { 'typst', 'markdown' },
+  pattern = { 'typst' },
   callback = function()
     vim.opt_local.wrap = true
-  end,
-})
-
--- Nextflow as Groovy
-autocmd({ 'BufRead', 'BufNewFile' }, {
-  group = augroup('nextflow_filetype', { clear = true }),
-  pattern = '*.nf',
-  callback = function()
-    vim.bo.filetype = 'groovy'
   end,
 })
 
@@ -45,6 +36,6 @@ autocmd({ 'BufRead', 'BufNewFile' }, {
 autocmd('TextYankPost', {
   group = augroup('highlight_yank', { clear = true }),
   callback = function()
-    (vim.hl or vim.highlight).on_yank()
+    vim.hl.on_yank()
   end,
 })

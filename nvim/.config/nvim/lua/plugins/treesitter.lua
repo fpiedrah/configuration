@@ -1,75 +1,79 @@
-local ensure_installed = {
+local PARSERS = {
   -- Research
-  "python",
-  "cuda",
-  "c",
-  "cpp",
-  "rust",
-  "julia",
-  "r",
+  'python',
+  'cuda',
+  'c',
+  'cpp',
+  'rust',
+  'julia',
+  'r',
 
   -- Writing
-  "latex",
-  "bibtex",
-  "typst",
-  "markdown",
-  "markdown_inline",
+  'latex',
+  'bibtex',
+  'typst',
+  'markdown',
+  'markdown_inline',
 
   -- Data
-  "json",
-  "yaml",
-  "toml",
-  "sql",
-  "proto",
+  'json',
+  'yaml',
+  'toml',
+  'sql',
+  'proto',
 
   -- Infrastructure
-  "bash",
-  "dockerfile",
-  "make",
-  "cmake",
-  "ninja",
-  "ssh_config",
+  'bash',
+  'dockerfile',
+  'make',
+  'cmake',
+  'ninja',
+  'ssh_config',
 
   -- Editor
-  "diff",
-  "gitcommit",
-  "gitignore",
-  "git_rebase",
-  "regex",
-  "comment",
-  "query",
-  "vim",
-  "vimdoc",
+  'diff',
+  'gitcommit',
+  'gitignore',
+  'git_rebase',
+  'regex',
+  'comment',
+  'lua',
+  'query',
+  'vim',
+  'vimdoc',
 
   -- Web
-  "html",
-  "css",
-  "javascript",
-  "typescript",
+  'html',
+  'css',
+  'javascript',
+  'typescript',
 
   -- Miscellaneous
-  "go",
-  "graphql",
+  'go',
+  'graphql',
 }
 
-local function configuration()
-  require('nvim-treesitter').install(ensure_installed)
-
-  local function start(buffer )
-    if pcall(vim.treesitter.start, buffer ) then
-      vim.bo[buffer ].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-    end
+-- Highlighting and Indentation
+local function start(buffer)
+  if pcall(vim.treesitter.start, buffer) then
+    vim.bo[buffer].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end
+end
+
+local function configuration()
+  require('nvim-treesitter').install(PARSERS)
 
   vim.api.nvim_create_autocmd('FileType', {
-    callback = function(args)
-      start(args.buf)
+    group = vim.api.nvim_create_augroup('treesitter_start', { clear = true }),
+    callback = function(event)
+      start(event.buf)
     end,
   })
 
+  -- Already Open Buffers
   for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
-    if vim.api.nvim_buf_is_loaded(buffer ) then
-      start(buffer )
+    if vim.api.nvim_buf_is_loaded(buffer) then
+      start(buffer)
     end
   end
 end

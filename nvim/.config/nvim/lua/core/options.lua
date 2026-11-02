@@ -1,69 +1,45 @@
-local g = vim.g       -- Global variables
-local opt = vim.opt   -- Set options (global/buffer/window-scoped)
+local opt = vim.opt
 
 -- General
-opt.clipboard = 'unnamedplus'                  -- Copy/paste to system clipboard
-opt.swapfile = false                           -- Don't use a swapfile
-opt.undofile = true                            -- Persist undo history across sessions
-opt.mouse = 'a'                                 -- Enable mouse in all modes
-opt.confirm = true                             -- Prompt instead of failing on unsaved changes
-opt.completeopt = 'menuone,noinsert,noselect'  -- Autocomplete behaviour
+opt.clipboard = 'unnamedplus'
+opt.swapfile = false
+opt.undofile = true
+opt.mouse = 'a'
+opt.confirm = true
 
--- Neovim UI
-opt.number = true           -- Show absolute line number on the cursor line
-opt.relativenumber = true   -- Show relative line numbers on other lines
-opt.cursorline = true       -- Highlight the current line
-opt.signcolumn = 'yes'      -- Always show the sign column to avoid text shifting
-opt.scrolloff = 8           -- Keep lines of context above/below the cursor
-opt.sidescrolloff = 8       -- Keep columns of context left/right of the cursor
-opt.showmatch = true        -- Highlight matching parenthesis
-opt.foldmethod = 'marker'   -- Fold on markers (default 'foldmarker')
-opt.splitright = true       -- Open vertical splits to the right
-opt.splitbelow = true       -- Open horizontal splits below
-opt.ignorecase = true       -- Ignore case when searching
-opt.smartcase = true        -- ...unless the pattern contains an uppercase letter
-opt.linebreak = true        -- Wrap on word boundaries
-opt.wrap = false            -- Don't wrap long lines by default
-opt.termguicolors = true    -- Enable 24-bit RGB colors
-opt.laststatus = 3          -- Single global statusline
+-- Interface
+opt.number = true
+opt.relativenumber = true
+opt.cursorline = true
+opt.signcolumn = 'yes'
+opt.scrolloff = 8
+opt.sidescrolloff = 8
+opt.showmatch = true
+opt.foldmethod = 'marker'
+opt.splitright = true
+opt.splitbelow = true
+opt.laststatus = 3
 
--- Tabs, Indent
-opt.expandtab = true        -- Use spaces instead of tabs
-opt.shiftwidth = 4          -- Indent by 4 spaces
-opt.tabstop = 4             -- A tab counts as 4 spaces
-opt.smartindent = true      -- Auto-indent new lines
+-- Search
+opt.ignorecase = true
+opt.smartcase = true
 
--- Memory, CPU
-opt.hidden = true           -- Allow background buffers
-opt.history = 100           -- Remember N lines of command history
-opt.synmaxcol = 240         -- Max column to apply syntax highlighting
-opt.updatetime = 250        -- Faster CursorHold events / quicker diagnostics
+-- Wrapping
+opt.wrap = false
+opt.linebreak = true
 
--- Startup
-opt.shortmess:append('sI')  -- Skip intro and search-count messages
+-- Indentation
+opt.expandtab = true
+opt.shiftwidth = 4
+opt.tabstop = 4
+opt.smartindent = true
 
--- Disable Unused Built-In Plugins
-local disabled_built_ins = {
-  'netrw',
-  'netrwPlugin',
-  'netrwSettings',
-  'netrwFileHandlers',
-  'gzip',
-  'zip',
-  'zipPlugin',
-  'tar',
-  'tarPlugin',
-  'getscript',
-  'getscriptPlugin',
-  'vimball',
-  'vimballPlugin',
-  '2html_plugin',
-  'logipat',
-  'rrhelper',
-  'spellfile_plugin',
-  'matchit',
-}
+-- Performance
+opt.synmaxcol = 240
+opt.updatetime = 250
 
-for _, plugin in pairs(disabled_built_ins) do
-  g['loaded_' .. plugin] = 1
-end
+-- Messages
+opt.shortmess:append('sI')
+
+-- Filetypes
+vim.filetype.add({ extension = { nf = 'groovy' } })

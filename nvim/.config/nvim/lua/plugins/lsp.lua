@@ -1,4 +1,4 @@
-local servers = {
+local SERVERS = {
   'clangd',
   'dockerls',
   'jsonls',
@@ -17,24 +17,23 @@ local servers = {
   'zls',
 }
 
--- LSP Keymaps
-local function on_attach(_, bufnr)
+-- Buffer Keymaps
+local function attach(event)
   local function map(lhs, rhs, desc)
-    vim.keymap.set('n', lhs, rhs, { buffer = bufnr, silent = true, desc = 'LSP: ' .. desc })
+    vim.keymap.set('n', lhs, rhs, { buffer = event.buf, silent = true, desc = 'LSP: ' .. desc })
   end
 
   map('gd', vim.lsp.buf.definition, 'Go to Definition')
   map('gD', vim.lsp.buf.declaration, 'Go to Declaration')
-  map('gi', vim.lsp.buf.implementation, 'Go to Implementation')
-  map('gr', vim.lsp.buf.references, 'List References')
-  map('K', vim.lsp.buf.hover, 'Hover Documentation')
-  map('<leader>k', vim.lsp.buf.signature_help, 'Signature Help')
-  map('<leader>rn', vim.lsp.buf.rename, 'Rename Symbol')
-  map('<leader>ca', vim.lsp.buf.code_action, 'Code Action')
   map('<leader>d', vim.diagnostic.open_float, 'Line Diagnostics')
-  map('[d', function() vim.diagnostic.jump({ count = -1, float = true }) end, 'Previous Diagnostic')
-  map(']d', function() vim.diagnostic.jump({ count = 1, float = true }) end, 'Next Diagnostic')
-  map('<leader>lf', function() vim.lsp.buf.format({ async = true }) end, 'Format Buffer')
+  map('<leader>lf', function()
+    vim.lsp.buf.format({ async = true })
+  end, 'Format Buffer')
+end
+
+-- Float on Diagnostic Jump
+local function open_diagnostic_float(_, buffer)
+  vim.diagnostic.open_float({ bufnr = buffer, scope = 'cursor', focus = false })
 end
 
 local function configuration()
@@ -49,7 +48,7 @@ local function configuration()
   })
 
   require('mason-lspconfig').setup({
-    ensure_installed = servers,
+    ensure_installed = SERVERS,
   })
 
   -- Diagnostics
@@ -57,28 +56,24 @@ local function configuration()
     virtual_text = true,
     severity_sort = true,
     float = { border = 'rounded', source = true },
+    jump = { on_jump = open_diagnostic_float },
   })
-
-  -- Completion Capabilities
-  local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
   -- Shared Server Defaults
   vim.lsp.config('*', {
-    capabilities = capabilities,
+    capabilities = require('cmp_nvim_lsp').default_capabilities(),
   })
 
-  -- Leave Typst to tinymist
+  -- Leave Typst to Tinymist
   vim.lsp.config('ltex_plus', {
-    filetypes = vim.tbl_filter(function(ft)
-      return ft ~= 'typst'
+    filetypes = vim.tbl_filter(function(filetype)
+      return filetype ~= 'typst'
     end, vim.lsp.config.ltex_plus.filetypes),
   })
 
   vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('lsp_attach', { clear = true }),
-    callback = function(event)
-      on_attach(vim.lsp.get_client_by_id(event.data.client_id), event.buf)
-    end,
+    callback = attach,
   })
 end
 
