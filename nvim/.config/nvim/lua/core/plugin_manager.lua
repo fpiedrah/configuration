@@ -20,6 +20,7 @@ vim.opt.rtp:prepend(LAZY_DIRECTORY)
 require('lazy').setup('plugins', {
   change_detection = { notify = false },
   checker = { enabled = false },
+  rocks = { enabled = false },
   performance = {
     rtp = {
       disabled_plugins = {

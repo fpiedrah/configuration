@@ -5,7 +5,12 @@ local FINDERS = { 'fd', vim.fn.expand('~/.pi/agent/bin/fd'), 'fdfind' }
 local function find_command(opts)
   local finder = vim.iter(FINDERS):find(function(candidate)
     return vim.fn.executable(candidate) == 1
-  end) or 'fd'
+  end)
+
+  if not finder then
+    vim.notify('fd not found: install fd-find', vim.log.levels.ERROR)
+    return { 'false' }
+  end
 
   local command = { finder, '--type', 'f', '--hidden', '--color', 'never' }
   if opts.ignored then

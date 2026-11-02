@@ -30,6 +30,7 @@ local function configuration()
           return item
         end,
         menu = {
+          lazydev = '[api]',
           nvim_lsp = '[LSP]',
           luasnip = '[snip]',
           path = '[path]',
@@ -42,6 +43,7 @@ local function configuration()
     experimental = { ghost_text = true },
 
     sources = {
+      { name = 'lazydev', group_index = 0 },
       { name = 'nvim_lsp' },
       { name = 'luasnip' },
       { name = 'path' },

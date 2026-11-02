@@ -32,7 +32,6 @@ opt.linebreak = true
 opt.expandtab = true
 opt.shiftwidth = 4
 opt.tabstop = 4
-opt.smartindent = true
 
 -- Performance
 opt.synmaxcol = 240

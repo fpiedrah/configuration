@@ -26,9 +26,6 @@ local function attach(event)
   map('gd', vim.lsp.buf.definition, 'Go to Definition')
   map('gD', vim.lsp.buf.declaration, 'Go to Declaration')
   map('<leader>d', vim.diagnostic.open_float, 'Line Diagnostics')
-  map('<leader>lf', function()
-    vim.lsp.buf.format({ async = true })
-  end, 'Format Buffer')
 end
 
 -- Float on Diagnostic Jump
