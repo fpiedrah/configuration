@@ -1,79 +1,39 @@
-local PARSERS = {
-  -- Research
-  'python',
-  'cuda',
-  'c',
-  'cpp',
-  'rust',
-  'julia',
-  'r',
+local INJECTED = { 'comment', 'regex', 'latex' }
 
-  -- Writing
-  'latex',
-  'bibtex',
-  'typst',
-  'markdown',
-  'markdown_inline',
-
-  -- Data
-  'json',
-  'yaml',
-  'toml',
-  'sql',
-  'proto',
-
-  -- Infrastructure
-  'bash',
-  'dockerfile',
-  'make',
-  'cmake',
-  'ninja',
-  'ssh_config',
-
-  -- Editor
-  'diff',
-  'gitcommit',
-  'gitignore',
-  'git_rebase',
-  'regex',
-  'comment',
-  'lua',
-  'query',
-  'vim',
-  'vimdoc',
-
-  -- Web
-  'html',
-  'css',
-  'javascript',
-  'typescript',
-
-  -- Miscellaneous
-  'go',
-  'graphql',
-}
-
--- Highlighting and Indentation
 local function start(buffer)
-  if pcall(vim.treesitter.start, buffer) then
+  if vim.api.nvim_buf_is_valid(buffer) and pcall(vim.treesitter.start, buffer) then
     vim.bo[buffer].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end
 end
 
+local function attach(buffer)
+  local treesitter = require('nvim-treesitter')
+  local language = vim.treesitter.language.get_lang(vim.bo[buffer].filetype)
+  local missing = vim.list_contains(treesitter.get_available(), language)
+    and not vim.list_contains(treesitter.get_installed(), language)
+
+  if not missing then
+    return start(buffer)
+  end
+
+  treesitter.install(language):await(vim.schedule_wrap(function()
+    start(buffer)
+  end))
+end
+
 local function configuration()
-  require('nvim-treesitter').install(PARSERS)
+  require('nvim-treesitter').install(INJECTED)
 
   vim.api.nvim_create_autocmd('FileType', {
     group = vim.api.nvim_create_augroup('treesitter_start', { clear = true }),
     callback = function(event)
-      start(event.buf)
+      attach(event.buf)
     end,
   })
 
-  -- Already Open Buffers
   for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
     if vim.api.nvim_buf_is_loaded(buffer) then
-      start(buffer)
+      attach(buffer)
     end
   end
 end

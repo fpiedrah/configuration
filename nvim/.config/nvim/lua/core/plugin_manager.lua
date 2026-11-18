@@ -1,6 +1,5 @@
 local LAZY_DIRECTORY = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 
--- Bootstrap
 if not vim.uv.fs_stat(LAZY_DIRECTORY) then
   local output = vim.fn.system({
     'git',
@@ -19,7 +18,6 @@ vim.opt.rtp:prepend(LAZY_DIRECTORY)
 
 require('lazy').setup('plugins', {
   change_detection = { notify = false },
-  checker = { enabled = false },
   rocks = { enabled = false },
   performance = {
     rtp = {

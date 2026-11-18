@@ -5,5 +5,5 @@ return {
     { '<leader>oo', '<cmd>Oil<CR>', desc = 'Open Parent Directory' },
   },
   dependencies = { 'nvim-tree/nvim-web-devicons' },
-  opts = { default_file_explorer = true },
+  opts = { view_options = { natural_order = false } },
 }

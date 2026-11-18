@@ -17,7 +17,6 @@ local SERVERS = {
   'zls',
 }
 
--- Buffer Keymaps
 local function attach(event)
   local function map(lhs, rhs, desc)
     vim.keymap.set('n', lhs, rhs, { buffer = event.buf, silent = true, desc = 'LSP: ' .. desc })
@@ -25,10 +24,8 @@ local function attach(event)
 
   map('gd', vim.lsp.buf.definition, 'Go to Definition')
   map('gD', vim.lsp.buf.declaration, 'Go to Declaration')
-  map('<leader>d', vim.diagnostic.open_float, 'Line Diagnostics')
 end
 
--- Float on Diagnostic Jump
 local function open_diagnostic_float(_, buffer)
   vim.diagnostic.open_float({ bufnr = buffer, scope = 'cursor', focus = false })
 end
@@ -48,7 +45,6 @@ local function configuration()
     ensure_installed = SERVERS,
   })
 
-  -- Diagnostics
   vim.diagnostic.config({
     virtual_text = true,
     severity_sort = true,
@@ -56,12 +52,6 @@ local function configuration()
     jump = { on_jump = open_diagnostic_float },
   })
 
-  -- Shared Server Defaults
-  vim.lsp.config('*', {
-    capabilities = require('cmp_nvim_lsp').default_capabilities(),
-  })
-
-  -- Leave Typst to Tinymist
   vim.lsp.config('ltex_plus', {
     filetypes = vim.tbl_filter(function(filetype)
       return filetype ~= 'typst'
@@ -78,7 +68,7 @@ return {
   'neovim/nvim-lspconfig',
   event = { 'BufReadPre', 'BufNewFile' },
   dependencies = {
-    'hrsh7th/cmp-nvim-lsp',
+    'saghen/blink.cmp',
     'williamboman/mason.nvim',
     'williamboman/mason-lspconfig.nvim',
   },

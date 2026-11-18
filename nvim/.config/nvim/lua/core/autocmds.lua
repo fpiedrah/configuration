@@ -1,7 +1,6 @@
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
--- 2-Space Indentation
 autocmd('FileType', {
   group = augroup('set_indent', { clear = true }),
   pattern = {
@@ -9,12 +8,9 @@ autocmd('FileType', {
     'html',
     'xhtml',
     'css',
-    'scss',
     'javascript',
     'typescript',
-    'yaml',
     'groovy',
-    'typst',
     'lua',
   },
   callback = function()
@@ -23,7 +19,6 @@ autocmd('FileType', {
   end,
 })
 
--- Soft-Wrap Prose
 autocmd('FileType', {
   group = augroup('set_wrap', { clear = true }),
   pattern = { 'typst' },
@@ -32,7 +27,6 @@ autocmd('FileType', {
   end,
 })
 
--- Highlight on Yank
 autocmd('TextYankPost', {
   group = augroup('highlight_yank', { clear = true }),
   callback = function()

@@ -1,4 +1,3 @@
--- Personal Snippets
 local SNIPPETS_DIRECTORY = vim.fn.stdpath('config') .. '/snippets'
 
 local function configuration()

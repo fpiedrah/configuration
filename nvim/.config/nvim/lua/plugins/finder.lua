@@ -1,34 +1,18 @@
--- File Finders
-local FINDERS = { 'fd', vim.fn.expand('~/.pi/agent/bin/fd'), 'fdfind' }
+local FIND_COMMAND = { 'fd', '--type', 'f', '--hidden', '--color', 'never', '--exclude', '.git' }
 
--- Find Command
-local function find_command(opts)
-  local finder = vim.iter(FINDERS):find(function(candidate)
-    return vim.fn.executable(candidate) == 1
-  end)
-
-  if not finder then
-    vim.notify('fd not found: install fd-find', vim.log.levels.ERROR)
-    return { 'false' }
-  end
-
-  local command = { finder, '--type', 'f', '--hidden', '--color', 'never' }
-  if opts.ignored then
-    table.insert(command, '--no-ignore')
-  end
-  for _, pattern in ipairs(vim.list_extend({ '.git' }, opts.exclude or {})) do
-    vim.list_extend(command, { '--exclude', pattern })
-  end
-  return command
-end
-
--- Dotfiles Picker
 local function find_dotfiles()
   require('telescope.builtin').find_files({
     prompt_title = 'Dotfiles',
     cwd = '~/Workspace/.configuration',
-    ignored = true,
-    exclude = { 'node_modules', '.pi/crew', '.pi/orchestra' },
+    find_command = vim.list_extend(vim.deepcopy(FIND_COMMAND), {
+      '--no-ignore',
+      '--exclude',
+      'node_modules',
+      '--exclude',
+      '.pi/crew',
+      '--exclude',
+      '.pi/orchestra',
+    }),
   })
 end
 
@@ -37,7 +21,7 @@ local function configuration()
 
   telescope.setup({
     pickers = {
-      find_files = { find_command = find_command },
+      find_files = { find_command = FIND_COMMAND },
     },
   })
 
@@ -58,6 +42,5 @@ return {
     'nvim-tree/nvim-web-devicons',
     { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
   },
-  branch = 'master',
   config = configuration,
 }
