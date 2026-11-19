@@ -8,9 +8,6 @@ pi/.pi/agent/node_modules
 herdr/.config/herdr/*
 !herdr/.config/herdr/config.toml
 
-# Crew Runtime
-/.pi/
-
 # Claude Project Local
 /.claude/settings.local.json
 /.claude/worktrees/
@@ -53,7 +50,6 @@ pi/.pi/agent/npm/
 pi/.pi/agent/pi-subagents/
 pi/.pi/agent/sessions/
 pi/.pi/agent/extensions/herdr-agent-state.ts
-pi/.pi/crew-plan/
 
 # Credentials
 .credentials.json

@@ -8,10 +8,6 @@ local function find_dotfiles()
       '--no-ignore',
       '--exclude',
       'node_modules',
-      '--exclude',
-      '.pi/crew',
-      '--exclude',
-      '.pi/orchestra',
     }),
   })
 end
