@@ -1,5 +1,3 @@
 # Claude: per-project local settings
 **/.claude/settings.local.json
 
-# Crew: run state written into each project
-.pi/crew/
